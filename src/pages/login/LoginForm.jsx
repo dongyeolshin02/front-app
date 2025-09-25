@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useLogin } from '../../hooks/useLogin.js';
@@ -12,34 +12,29 @@ const schema = yup.object().shape({
 
 function LoginForm(props) {
 
-
-
     const {register, handleSubmit, formState:{errors}} =
                 useForm({resolver : yupResolver(schema)});
 
-    const {loginMutation} = useLogin();
-    const [loginError, setLoginError] = useState('');
+    const loginMutation = useLogin();
     
     const goLogin = async (data) => {
-        // 이전 에러 메시지 초기화
-        setLoginError('');
-        
-        try {
-            await loginMutation.mutateAsync(data);
-            // 로그인 성공 시 처리 (예: 페이지 이동)
-        } catch (error) {
-            // 로그인 실패 시 처리
-            console.error('Login failed:', error.response);
-            
-            // 서버에서 받은 에러 메시지 처리
-            if (error.response?.status === 401) {
-                alert('아이디 또는 패스워드가 올바르지 않습니다.');
-            } else if (error.response?.status === 400) {
-                alert('입력한 정보를 다시 확인해주세요.');
-            } else {
-                alert('로그인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-            }
+       console.log(data);
+       //함수 실행 
+       try{
+           //  mutationFn 실행 -> onSuccess(또는 onError) -> 호출한 곳 
+           await  loginMutation.mutateAsync(data);
+
+       }catch(error) {
+
+
+        if(error.status === 401) {
+            alert('아이디 또는 패스워드가 일치하지 않습니다.');
+        }else if(error.status === 400) {
+            alert('입력한 정보가 잘못되었습니다.');
+        }else {
+            alert('처리 중 오류가 발생했습니다. 다시시도 해주세요.'); 
         }
+       }
     }
 
     return (

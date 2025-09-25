@@ -11,11 +11,14 @@ const api = axios.create({
 api.interceptors.request.use(
     (config)=> {
         
+        //zustand 를 호출할 때
+        //컴포넌트가 아닌 곳에서는 getState() 함수를 통해서 가져와함 
         const token = authStore.getState().token;
-        console.log(token);
+
         if(token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
+        console.log('11');
         return config;
     }
 );

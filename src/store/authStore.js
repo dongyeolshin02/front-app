@@ -22,8 +22,7 @@ export const authStore = create(
             setLogin: ({token, userId, userName, userRole}) =>
                
                 set((state)=>{
-                    console.log(userName);
-                     console.log(token);
+                    
                     state.token = token;
                     state.userId = userId;
                     state.userName = userName;

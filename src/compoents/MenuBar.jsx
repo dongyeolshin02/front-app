@@ -8,47 +8,43 @@ import { NavDropdown } from 'react-bootstrap';
 
 function MenuBar(props) {
 
-      const { isAuthenticated, clearAuth, getUserRole } = authStore();
-      const userName = authStore((s) => s.userName);
-        const navigate = useNavigate(); 
-      const handleLogout = () =>{
+    const {isAuthenticated, clearAuth, getUserRole} = authStore();
+    //랜더링 피하기 위해 필요한 것만 가져옴
+    const userName = authStore((state)=> state.userName);
+    const navigate = useNavigate();
+
+    const handleLogout = () =>{
         clearAuth();
+        localStorage.removeItem("auth-info");
         navigate('/login');
-      }
+    }
 
     return (
         <Navbar className="bg-body-tertiary">
-            <Container>
-                <Nav className="me-auto">
+            <Nav className="me-auto">
                 <Nav.Link as={NavLink} to="/board" className={ ({isActive})=> isActive ? 'active' : ''}>게시판</Nav.Link>
                 <Nav.Link as={NavLink} to="/gal"   className={ ({isActive})=> isActive ? 'active' : ''}>이미지게시판</Nav.Link>
-                </Nav>
-                {isAuthenticated() && getUserRole() ==='ROLE_ADMIN' && (
-                        <Nav.Link 
-                            as={NavLink} 
-                            to="/admin" 
-                            className={({isActive}) => isActive ? 'active' : ''}
-                        >
-                            관리자페이지
-                        </Nav.Link>
-                    )}
-                <Navbar.Collapse className="justify-content-end">
-                <Navbar.Text>
-                  { isAuthenticated() ? (
-                    <>
-                        <NavDropdown title={userName} id="navbarScrollingDropdown">
-                        <NavDropdown.Item href="#action3">회원정보</NavDropdown.Item>
-                        <NavDropdown.Item onClick={handleLogout}>
-                            로그아웃
-                        </NavDropdown.Item>
-                       
-                        </NavDropdown>
-                    </>
-                  )
-                  : '' }
-                </Navbar.Text>
-                </Navbar.Collapse>
-            </Container>
+            </Nav>
+                 {
+                    isAuthenticated() && getUserRole() ==='ROLE_ADMIN' &&
+                     ( <Nav.Link as={NavLink}   to ='/admin' > 관리자 페이지</Nav.Link> )
+                 }
+            <Navbar.Collapse className="justify-content-end">
+                {
+                    isAuthenticated() ?
+                    (
+                         <>
+                            <NavDropdown title={userName} id="navbarScrollDropdown">
+                            <NavDropdown.Item href="#">회원정보</NavDropdown.Item>
+                            <NavDropdown.Item onClick={handleLogout}>로그아웃</NavDropdown.Item>
+                          </NavDropdown>
+                         </>
+                    ) :
+                        
+                    ( <Nav.Link as={NavLink}   to ='/login' > 로그인</Nav.Link> )  
+                        
+                }
+            </Navbar.Collapse>
         </Navbar>
     );
 }

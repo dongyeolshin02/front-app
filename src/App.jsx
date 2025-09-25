@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider } from 'react-router'
-import { router } from './router/router';
+import { router } from './router/router'
 
 
 //react -query 설정
