@@ -81,12 +81,12 @@ function BoardDetail(props) {
             const result = await  updateBoardMutation.mutateAsync(formData);
             
             if(result.resultCode === 200) {
-                    alert('게시글이 수정되었습니다.');
-                    queryClient.invalidateQueries( {queryKey:['board', brdId]} )
-                    navigate('/board');
-                }else {
-                    alert("게시글이 수정이 실패했습니다.");
-                }
+                alert('게시글이 수정되었습니다.');
+                queryClient.invalidateQueries( {queryKey:['board', brdId]} )
+                navigate('/board');
+            }else {
+                alert("게시글이 수정이 실패했습니다.");
+            }
 
 
         }catch(error) {
