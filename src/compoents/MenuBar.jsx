@@ -29,7 +29,7 @@ function MenuBar(props) {
                     isAuthenticated() && getUserRole() ==='ROLE_ADMIN' &&
                      ( <Nav.Link as={NavLink}   to ='/admin' > 관리자 페이지</Nav.Link> )
                  }
-            <Navbar.Collapse className="justify-content-end">
+            <Navbar.Collapse className="justify-content-end" style={{marginRight : '50px'}}>
                 {
                     isAuthenticated() ?
                     (

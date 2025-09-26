@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+
+.d-contents{
+    margin-top: 10px;
+    width: 600px;
+    height: auto;
+    border : 1px solid black;
+    border-radius: 7px;
+}
+
+.sch{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 70px;
+    border-bottom:  1px solid black;
+    gap: 5px;
+}
+
+.board{
+    padding: 2rem 2rem;
+}
+
+.text-contents{
+    resize: none;
+    height: 150px;
+}
+
+.file-list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.error{
+    color: red;
+    font-weight: 600;
+}
