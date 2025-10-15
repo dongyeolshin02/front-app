@@ -20,9 +20,10 @@ export const authStore = create(
 
             //로그인 후 정보를 저장하는 함수 
             setLogin: ({token, userId, userName, userRole}) =>
-               
+            
                 set((state)=>{
-                    
+                        console.log(token);
+               
                     state.token = token;
                     state.userId = userId;
                     state.userName = userName;
@@ -37,16 +38,18 @@ export const authStore = create(
             getToken : ()=> get().token ,
 
             //정보지우기
-            clearAuth: () =>
+            clearAuth: () => {
                 set((state)=>{
                     state.token = null;
                     state.userId = null;
                     state.suerName = null;
                     state.userRole = null
-            })
-
-
-    })),
+                });
+                //localstorage 삭제 
+                authStore.persist.clearStorage();
+            },
+        }
+    )),
        // 원하는 내용을 localstorge 에 저장 
     {
         name : 'auth-info',
