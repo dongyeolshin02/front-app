@@ -42,10 +42,10 @@ export const authStore = create(
                 set((state)=>{
                     state.token = null;
                     state.userId = null;
-                    state.suerName = null;
+                    state.userName = null;
                     state.userRole = null
                 });
-                //localstorage 삭제 
+                //localstorage 삭제
                 authStore.persist.clearStorage();
             },
         }

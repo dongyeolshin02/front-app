@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -7,7 +8,7 @@ export default defineConfig({
   server :{
     open : true,
     port : 4000,
-    //서버와의 통신을 위한 proxy 설정 > 
+    //서버와의 통신을 위한 proxy 설정 >
     proxy :{
       '/api' : {
         target : 'http://localhost:9090/api',
@@ -15,5 +16,11 @@ export default defineConfig({
         rewrite : (path) => path.replace(/^\/api/, '')
       }
     }
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.js',
+    css: true,
   }
 })

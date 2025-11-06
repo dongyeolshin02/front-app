@@ -50,10 +50,10 @@ function LoginForm(props) {
                         {errors.username &&(<div className='invalid-feedback'>{errors.username.message}</div> )}
                      </div>
                      <div className='mb-3'>
-                        <label htmlFor='username' className='form-label'>패스워드</label>
-                        <input type='password' className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+                        <label htmlFor='password' className='form-label'>패스워드</label>
+                        <input type='password' className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                            id="password" {...register('password')} />
-                        {errors.username &&(<div className='invalid-feedback'>{errors.password.message}</div> )}
+                        {errors.password &&(<div className='invalid-feedback'>{errors.password.message}</div> )}
                      </div>
                      <div className='text-center'>
                          <button type='submit' className='btn btn-primary me-2'> 로그인</button>
